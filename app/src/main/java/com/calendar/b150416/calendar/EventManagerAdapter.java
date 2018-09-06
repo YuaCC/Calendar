@@ -1,6 +1,11 @@
 package com.calendar.b150416.calendar;
 
 public class EventManagerAdapter implements EventManager {
+    NotifyManager nm=null;
+    public EventManagerAdapter(){
+        nm=new NotifyManagerAdapter();
+    }
+
     public int addEvent(Event e){
         return 0;
     }
