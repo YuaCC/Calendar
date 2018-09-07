@@ -14,6 +14,5 @@ public class Event {
         this.hour=hour;
         this.minute=minute;
         this.description=description;
-
     }
 }

@@ -27,6 +27,19 @@ public class CalendarView extends View {
         displayDate=Calendar.getInstance();
         displayDate.setTime(new Date());
     }
+    public void setYear(int year){
+        displayDate.set(Calendar.DAY_OF_MONTH,1);
+        displayDate.set(Calendar.YEAR,year);
+    }
+    public void setMonth(int month){
+        displayDate.set(Calendar.DAY_OF_MONTH,1);
+        displayDate.set(Calendar.MONTH,month);
+    }
+    public void display(int year,int month){
+        displayDate.set(Calendar.DAY_OF_MONTH,1);
+        displayDate.set(Calendar.MONTH,month);
+        displayDate.set(Calendar.YEAR,year);
+    }
     public void setEventManager(EventManager ema){
         this.ema=ema;
     }

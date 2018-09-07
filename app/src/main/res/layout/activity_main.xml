@@ -11,11 +11,23 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:layout_weight="1">
-        <TextView
+
+        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="2018-09-03"/>
+            android:id="@+id/yearSpinner"
+            >
+
+        </Spinner>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/monthSpinner"
+            >
+
+        </Spinner>
     </LinearLayout>
     <com.calendar.b150416.calendar.CalendarView
         android:layout_width="match_parent"
