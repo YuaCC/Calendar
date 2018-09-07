@@ -1,4 +1,8 @@
 package com.calendar.b150416.calendar;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *事件管理器接口。负责事件的增加，删除，修改，删除。当事件时间到达时,通过NotifyManager实现提醒
  */
@@ -32,4 +36,6 @@ public interface EventManager {
      * @return 事件的信息
      */
     Event getEvent(int id);
+
+    ArrayList<Event> getEventOfDay(int year,int month,int day);
 }

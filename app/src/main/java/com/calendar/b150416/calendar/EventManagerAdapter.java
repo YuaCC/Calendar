@@ -1,5 +1,7 @@
 package com.calendar.b150416.calendar;
 
+import java.util.ArrayList;
+
 public class EventManagerAdapter implements EventManager {
     NotifyManager nm=null;
     public EventManagerAdapter(){
@@ -21,5 +23,8 @@ public class EventManagerAdapter implements EventManager {
 
     public Event getEvent(int id){
         return new Event(2018,9,3,12,0,"EventManagerAdapter");
+    }
+    public ArrayList<Event> getEventOfDay(int year, int month, int day){
+        return new ArrayList<Event>();
     }
 }
