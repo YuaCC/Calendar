@@ -3,75 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_year_spinner"
-            >
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_month_spinner"
-            >
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_day_spinner"
-            >
-        </Spinner>
-
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_hour_spinner"
-            >
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:id="@+id/input_minute_spinner"
-            >
-        </Spinner>
-
-
-        <EditText
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="事项描述"
-            android:enabled="true"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:id="@+id/input_event_description"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="保存"
-            android:id="@+id/input_event_save"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="不保存"
-            android:id="@+id/input_event_nosave"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="删除"
-            android:id="@+id/input_event_delete"/>
-
-
+  
 
 
 </LinearLayout>
