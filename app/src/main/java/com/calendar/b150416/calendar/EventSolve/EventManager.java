@@ -32,7 +32,5 @@ public interface EventManager {
 
     Event getEventByPosition(int position);
 
-    LinkedList<Event> getEventOfDay(int year, int month, int day);
-
     public void save();
 }
