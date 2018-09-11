@@ -43,8 +43,6 @@ public class NotifyBinder extends Binder {
     }
     public void removeEvent(Event e){
         if(timers.containsKey(e)){
-            Timer t=timers.get(e);
-            t.cancel();
             timers.remove(e);
         }
     }

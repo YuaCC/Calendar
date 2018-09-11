@@ -83,41 +83,14 @@ public class EventManagerAdapter implements EventManager{
     public  Event getEventByPosition(int position){
             return datas.get(position);
     }
-    public void save(){
-        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-        db.delete("EVENT",null,null);
-        ContentValues cv = new ContentValues();
-        for(Event e:datas){
-            cv.put("YEAR",e.year);
-            cv.put("MONTH",e.month);
-            cv.put("DAY",e.day);
-            cv.put("HOUR",e.hour);
-            cv.put("MINUTE",e.minute);
-            cv.put("DESCRIPTION",e.description);
-            db.insert("EVENT", null,cv);
-        }
-        db.close();
-    }
-    public void load(){
-        if(datas==null)
-            datas=new LinkedList<Event>();
-        while(datas.size()>0)
-            removeEvent(datas.get(0));
 
-        SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
-        Cursor cs = db.query("EVENT", null, null, null, null, null, null);
-        Event e = null;
-        while (cs.moveToNext()) {
-            int year=cs.getInt(0);
-            int month=cs.getInt(1);
-            int day=cs.getInt(2);
-            int hour=cs.getInt(3);
-            int minute=cs.getInt(4);
-            String description=cs.getString(5);
-            addEvent(new Event(year,month,day,hour,minute,description));
-        }
-        cs.close();
-        db.close();
+
+    public void save(){
+
+    }
+
+    public void load(){
+
     }
 
 }

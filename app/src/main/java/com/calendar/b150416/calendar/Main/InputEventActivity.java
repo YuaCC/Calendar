@@ -17,18 +17,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
 public class InputEventActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     Spinner yearSpinner;
     Spinner monthSpinner;
     Spinner daySpinner;
     Spinner hourSpinner;
     Spinner minuteSpinner;
-    Calendar cal;
+
     ArrayAdapter<Integer> yearadapter;
     ArrayAdapter<Integer> monthadapter;
     ArrayAdapter<Integer> dayadapter;
     ArrayAdapter<Integer> houradapter;
     ArrayAdapter<Integer> minuteadapter;
+
+    Calendar cal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,7 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
 
         cal=Calendar.getInstance();
         cal.setTime(new Date());
+
         Intent intent=getIntent();
         int year=intent.getIntExtra("year",cal.get(Calendar.YEAR));
         int month=intent.getIntExtra("month",cal.get(Calendar.MONTH));
@@ -55,8 +59,7 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
         int hour=intent.getIntExtra("hour",cal.get(Calendar.HOUR_OF_DAY));
         int minute=intent.getIntExtra("minute",cal.get(Calendar.MINUTE));
         String description=intent.getStringExtra("description");
-        EditText editText=(EditText)findViewById(R.id.input_event_description);
-        editText.setText(description);
+
 
         cal.set(Calendar.YEAR,year);
         cal.set(Calendar.MONTH,month);
@@ -101,6 +104,10 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
         minuteSpinner.setSelection(minute);
         minuteSpinner.setOnItemSelectedListener(this);
 
+
+        EditText editText=(EditText)findViewById(R.id.input_event_description);
+        editText.setText(description);
+
         Button saveButton=(Button)findViewById(R.id.input_event_save);
         Button nosaveButton=(Button)findViewById(R.id.input_event_nosave);
         Button deleteButton=(Button)findViewById(R.id.input_event_delete);
@@ -109,11 +116,6 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-                int year=cal.get(Calendar.YEAR);
-                int month=cal.get(Calendar.MONTH);
-                int day=cal.get(Calendar.DAY_OF_MONTH);
-                int hour=cal.get(Calendar.HOUR_OF_DAY);
-                int minute=cal.get(Calendar.MINUTE);
                 EditText editText=(EditText)findViewById(R.id.input_event_description);
                 intent.putExtra("year",cal.get(Calendar.YEAR));
                 intent.putExtra("month",cal.get(Calendar.MONTH));
@@ -129,11 +131,6 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-                int year=cal.get(Calendar.YEAR);
-                int month=cal.get(Calendar.MONTH);
-                int day=cal.get(Calendar.DAY_OF_MONTH);
-                int hour=cal.get(Calendar.HOUR_OF_DAY);
-                int minute=cal.get(Calendar.MINUTE);
                 EditText editText=(EditText)findViewById(R.id.input_event_description);
                 intent.putExtra("year",cal.get(Calendar.YEAR));
                 intent.putExtra("month",cal.get(Calendar.MONTH));
@@ -149,11 +146,6 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-                int year=cal.get(Calendar.YEAR);
-                int month=cal.get(Calendar.MONTH);
-                int day=cal.get(Calendar.DAY_OF_MONTH);
-                int hour=cal.get(Calendar.HOUR_OF_DAY);
-                int minute=cal.get(Calendar.MINUTE);
                 EditText editText=(EditText)findViewById(R.id.input_event_description);
                 intent.putExtra("year",cal.get(Calendar.YEAR));
                 intent.putExtra("month",cal.get(Calendar.MONTH));
