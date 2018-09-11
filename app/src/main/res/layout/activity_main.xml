@@ -6,32 +6,5 @@
     android:orientation="vertical"
     >
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/yearSpinner"
-            >
-
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/monthSpinner"
-            >
-
-        </Spinner>
-    <com.calendar.b150416.calendar.Calendar.CalendarView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:layout_margin="0dp"
-        >
-    </com.calendar.b150416.calendar.Calendar.CalendarView>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/eventList"
-        >
-
-    </ListView>
+     
 </LinearLayout>
