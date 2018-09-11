@@ -15,4 +15,7 @@ public class Event {
         this.minute=minute;
         this.description=description;
     }
+    public long getTime(){
+        return ( ((long)year*365+day)*24+hour)*60+minute;
+    }
 }

@@ -1,12 +1,19 @@
 package com.calendar.b150416.calendar;
 
+import android.app.Notification;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 public class NotifyManagerAdapter implements NotifyManager {
+    Context mcontext;
+    public NotifyManagerAdapter(Context context){
+        mcontext=context;
+    }
     public void notifyEvent(int id,Event e){
-        /**
-         * 在这里写上代码使得手机推送一条消息提醒用户事件时间到了
-         */
-        Log.d("NofifyManagerAdapter",String.format("Notify Event ,id=%d,deccription=%s",id,e.description));
+
+        System.out.println("搞事情");
     }
 }

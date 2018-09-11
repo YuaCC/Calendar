@@ -149,7 +149,7 @@ public class CalendarView extends View {
         else
             return str;
     }
-    private int getDaysOfMonth(Calendar cal){
+    static public int getDaysOfMonth(Calendar cal){
         int month=cal.get(Calendar.MONTH);
         int year=cal.get(Calendar.YEAR);
         switch (month){

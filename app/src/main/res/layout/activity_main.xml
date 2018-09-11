@@ -33,8 +33,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/calendarView"
-        android:layout_weight="9"
+        android:layout_weight="8"
         android:layout_margin="0dp"
         >
     </com.calendar.b150416.calendar.CalendarView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:id="@+id/eventList"
+        >
+
+    </ListView>
 </LinearLayout>

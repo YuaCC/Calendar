@@ -31,6 +31,9 @@ public interface EventManager {
      */
     boolean changeEvent(Event oldEvent,Event newEnvent);
 
+    Event getEventByPosition(int position);
 
     LinkedList<Event> getEventOfDay(int year, int month, int day);
+
+    public void save();
 }
