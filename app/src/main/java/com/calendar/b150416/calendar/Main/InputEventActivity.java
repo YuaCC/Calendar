@@ -1,16 +1,17 @@
-package com.calendar.b150416.calendar;
+package com.calendar.b150416.calendar.Main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.calendar.b150416.calendar.Calendar.CalendarView;
+import com.calendar.b150416.calendar.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,7 +63,7 @@ public class InputEventActivity extends AppCompatActivity implements AdapterView
         cal.set(Calendar.DAY_OF_MONTH,day);
         cal.set(Calendar.HOUR_OF_DAY,hour);
         cal.set(Calendar.MINUTE,minute);
-        int daycnt=CalendarView.getDaysOfMonth(cal);
+        int daycnt= CalendarView.getDaysOfMonth(cal);
 
         for(int i=1901;i<=2049;++i) yearList.add(i);
         for(int i=1;i<=12;++i)  monthList.add(i);

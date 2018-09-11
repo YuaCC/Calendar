@@ -1,24 +1,30 @@
-package com.calendar.b150416.calendar;
+package com.calendar.b150416.calendar.Main;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.calendar.b150416.calendar.Calendar.CalendarView;
+import com.calendar.b150416.calendar.EventSolve.Event;
+import com.calendar.b150416.calendar.EventSolve.EventManagerAdapter;
+import com.calendar.b150416.calendar.Notify.NotifyBinder;
+import com.calendar.b150416.calendar.Notify.NotifyService;
+import com.calendar.b150416.calendar.R;
+
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     Spinner yearSpinner;
@@ -27,6 +33,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<Integer> monthList;
     CalendarView calendarView;
     EventManagerAdapter ema;
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            ema.notifyBinder=(NotifyBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            ema.notifyBinder=null;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 Intent i=new Intent(MainActivity.this,InputEventActivity.class);
 
-                if(position<ema.datas.size()){
+                if(position<ema.size()){
                     Event event=ema.getEventByPosition(position);
                     i.putExtra("year",event.year);
                     i.putExtra("month",event.month);
@@ -82,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         monthSpinner.setSelection(calendarView.displayDate.get(Calendar.MONTH));
         monthSpinner.setOnItemSelectedListener(this);
 
-
+        Intent serviceIntent = new Intent(this, NotifyService.class);
+        bindService(serviceIntent, mConnection, BIND_AUTO_CREATE);
     }
 
     @Override
@@ -98,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Event e=new Event(year,month,day,hour,minute,description);
             switch (resultCode){
                 case 0:
-                    if(requestCode<ema.datas.size())
+                    if(requestCode<ema.size())
                         ema.changeEvent(ema.getEventByPosition(requestCode),e);
                     else
                         ema.addEvent(e);
@@ -142,6 +161,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onStop();
         ema.save();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        unbindService(mConnection);
+
+    }
+
+
 
 }
 

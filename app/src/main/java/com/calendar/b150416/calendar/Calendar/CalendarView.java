@@ -1,16 +1,16 @@
-package com.calendar.b150416.calendar;
+package com.calendar.b150416.calendar.Calendar;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+
+import com.calendar.b150416.calendar.EventSolve.EventManager;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.jar.Attributes;
 
 public class CalendarView extends View {
     public Calendar nowDate;
@@ -91,7 +91,13 @@ public class CalendarView extends View {
         paint.setTextSize(50);
         String daystr=String.valueOf(day);
         drawTextLine(daystr,l,r,u,paint,canvas);
-
+        Calendar cal=Calendar.getInstance();
+        cal.set(Calendar.YEAR,year);
+        cal.set(Calendar.MONTH,month);
+        cal.set(Calendar.DAY_OF_MONTH,day);
+        Lunar lunar=new Lunar(cal);
+        String lunarstr=lunar.getChinaDayString();
+        drawTextLine(lunarstr,l,r,u+50,paint,canvas);
         if(year==nowDate.get(Calendar.YEAR)&&month==nowDate.get(Calendar.MONTH)&&day==nowDate.get(Calendar.DAY_OF_MONTH)){
             paint.setColor(Color.GREEN);
             paint.setStrokeWidth(5);

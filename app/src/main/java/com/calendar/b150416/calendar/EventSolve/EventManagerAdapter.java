@@ -1,84 +1,60 @@
-package com.calendar.b150416.calendar;
+package com.calendar.b150416.calendar.EventSolve;
 
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Looper;
-import android.view.View;
-import android.widget.AdapterView;
+import android.os.IBinder;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
+import com.calendar.b150416.calendar.Notify.NotifyBinder;
+
 import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class EventManagerAdapter implements EventManager {
-    NotifyManager nm=null;
+public class EventManagerAdapter implements EventManager{
     LinkedList<Event> datas;
-    HashMap<Event,Timer> timers;
     ArrayAdapter<String> arrayAdapter;
     MyDataBaseHelper dataBaseHelper;
+   public  NotifyBinder notifyBinder=null;
+    public int size(){
+        return datas.size();
+    }
     public EventManagerAdapter(ArrayAdapter<String> arrayAdapter,Context context){
-        nm=new NotifyManagerAdapter(context);
         datas=new LinkedList<Event> ();
-        timers=new HashMap<Event,Timer>();
         this.arrayAdapter=arrayAdapter;
         dataBaseHelper=new MyDataBaseHelper(context);
         load();
-
     }
 
-    public Event inputNewEvent(){
-        return null;
-    }
     public void addEvent(Event e){
-        int i=0;
-        for(i=0;i<datas.size();++i)
-            if(datas.get(i).getTime()>e.getTime())
-            {
-                datas.add(i,e);
-                break;
-            }
-        if(i>=datas.size())
-            datas.add(e);
+        if(!datas.contains(e)){
+            int i=0;
+            for(i=0;i<datas.size();++i)
+                if(datas.get(i).getTime()>e.getTime())
+                {
+                    datas.add(i,e);
+                    break;
+                }
+            if(i>=datas.size())
+                datas.add(e);
 
-        arrayAdapter.insert(String.format("%d/%d/%d %d:%d %s",e.year,e.month+1,e.day,e.hour,e.minute,e.description),i);
-        arrayAdapter.notifyDataSetChanged();
+            arrayAdapter.insert(String.format("%d/%d/%d %d:%d %s",e.year,e.month+1,e.day,e.hour,e.minute,e.description),i);
+            arrayAdapter.notifyDataSetChanged();
 
-        Calendar calendar=Calendar.getInstance();
-        calendar.set(Calendar.YEAR,e.year);
-        calendar.set(Calendar.MONTH,e.month);
-        calendar.set(Calendar.HOUR_OF_DAY,e.hour);
-        calendar.set(Calendar.MINUTE,e.minute);
-        calendar.set(Calendar.SECOND,0);
-        Date date=calendar.getTime();
-        Timer timer=new Timer();
-        final Event finale=e;
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                nm.notifyEvent(0,finale);
-            }
-        }, date);
-        timers.put(e,timer);
+            if(notifyBinder!=null)
+                notifyBinder.addEvent(e);
+        }
+
 
     }
 
     public boolean removeEvent(Event e){
         if(datas.contains(e))
         {
-            Timer timer=timers.get(e);
-            timer.cancel();
-            timers.remove(e);
+            if(notifyBinder!=null)
+                notifyBinder.removeEvent(e);
             arrayAdapter.remove(arrayAdapter.getItem(datas.indexOf(e)));
             arrayAdapter.notifyDataSetChanged();
             datas.remove(e);
@@ -123,6 +99,11 @@ public class EventManagerAdapter implements EventManager {
         db.close();
     }
     public void load(){
+        if(datas==null)
+            datas=new LinkedList<Event>();
+        while(datas.size()>0)
+            removeEvent(datas.get(0));
+
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
         Cursor cs = db.query("EVENT", null, null, null, null, null, null);
         Event e = null;
@@ -138,4 +119,5 @@ public class EventManagerAdapter implements EventManager {
         cs.close();
         db.close();
     }
+
 }

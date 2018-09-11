@@ -1,9 +1,8 @@
-package com.calendar.b150416.calendar;
+package com.calendar.b150416.calendar.EventSolve;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import com.calendar.b150416.calendar.EventSolve.Event;
+
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  *事件管理器接口。负责事件的增加，删除，修改，删除。当事件时间到达时,通过NotifyManager实现提醒

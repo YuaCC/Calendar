@@ -1,4 +1,4 @@
-package com.calendar.b150416.calendar;
+package com.calendar.b150416.calendar.EventSolve;
 
 public class Event {
     public int year;
@@ -17,5 +17,10 @@ public class Event {
     }
     public long getTime(){
         return ( ((long)year*365+day)*24+hour)*60+minute;
+    }
+    @Override
+    public boolean equals(Object o){
+        Event other=(Event)o;
+        return other.year==year&&other.month==month&&other.day==day&&other.hour==hour&&other.minute==minute;
     }
 }
