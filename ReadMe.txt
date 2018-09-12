@@ -1,7 +1,5 @@
-框架
-
-MainActivity负责主界面绘制以及日历显示。接收用户增删改查事件的操作。然后把这些操作的信息交给另一个实现了EventManager接口的类处理。
-
-EventManger是一个接口，包含事件的增删改查，以后需要添加一个类实现该接口。并且事件时间到了的时候，通知另一个实现了NotifyManager接口的类进行提醒。
-
-NotifyManager是一个接口，包含事件的提醒，以后需要添加一个类实现该接口。
+宋荣丹实现了Lunar类，完成阳历农历转换
+王学舟实现了InputEvent类，完成事项的输入
+张艳实现了NotifyBinder,NotifyService，实现后台运行
+邵双双实现EventManagerAdapter中的save（）load（）函数以及MyDataBaseHelper类，完成数据保存和加载
+袁呈呈实现了其他部分
