@@ -34,18 +34,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     CalendarView calendarView;
     EventManagerAdapter ema;
 
+    /************************/
+    //定义如何与NotifyService连接
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            //连接到service则保存该service的NotifyBinder
             ema.notifyBinder=(NotifyBinder) service;
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            //与service断开则不保存该service的NotifyBinder
             ema.notifyBinder=null;
         }
     };
-
+/*******************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,9 +104,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         monthSpinner.setAdapter(monthadapter);
         monthSpinner.setSelection(calendarView.displayDate.get(Calendar.MONTH));
         monthSpinner.setOnItemSelectedListener(this);
-
+/**********************************************/
+        //启动服务
         Intent serviceIntent = new Intent(this, NotifyService.class);
         bindService(serviceIntent, mConnection, BIND_AUTO_CREATE);
+        /************************************/
     }
 
     @Override

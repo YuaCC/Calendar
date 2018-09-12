@@ -10,23 +10,20 @@ public class NotifyService extends Service {
     NotifyBinder notifyBinder;
     public NotifyService() {
     }
-
+//实现Service中的函数onBind
     @Override
     public IBinder onBind(Intent intent) {
         return notifyBinder;
     }
 
 
+    //初始化
     @Override
     public void onCreate() {
         super.onCreate();
         notifyBinder=new NotifyBinder();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 
 
 }

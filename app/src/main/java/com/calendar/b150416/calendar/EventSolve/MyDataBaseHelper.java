@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 public class MyDataBaseHelper extends SQLiteOpenHelper {
+    //建表语句
     public static final String CREATE_TABLE="CREATE TABLE if not exists `EVENT` (\n" +
             "`YEAR`  integer  NOT NULL ,\n" +
             "`MONTH`  integer  NOT NULL ,\n" +
@@ -15,11 +16,13 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
             "`DESCRIPTION`  text NOT NULL ,\n" +
             "`ID`  integer primary key autoincrement \n" +
             ")\n" ;
+
     private Context mcontext;
     public  MyDataBaseHelper(Context context){
         super(context,"user.db" ,null,1);
         mcontext = context;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);

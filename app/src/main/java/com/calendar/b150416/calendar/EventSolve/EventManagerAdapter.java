@@ -76,9 +76,14 @@ public class EventManagerAdapter implements EventManager{
     public  Event getEventByPosition(int position){
             return datas.get(position);
     }
+
+    //把datas中的数据保存到数据库中
     public void save(){
+        //获取数据库
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+        //删除原来的表EVENT
         db.delete("EVENT",null,null);
+        //读取数据并插入到EVENT中
         ContentValues cv = new ContentValues();
         for(Event e:datas){
             cv.put("YEAR",e.year);
@@ -89,17 +94,24 @@ public class EventManagerAdapter implements EventManager{
             cv.put("DESCRIPTION",e.description);
             db.insert("EVENT", null,cv);
         }
+        //关闭数据库
         db.close();
     }
+
+    //把数据库中的数据保存到datas中
     public void load(){
+
         if(datas==null)
             datas=new LinkedList<Event>();
+        //清楚datas中的旧数据
         while(datas.size()>0)
             removeEvent(datas.get(0));
 
+        //获取数据库
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
+
+        //读取数据
         Cursor cs = db.query("EVENT", null, null, null, null, null, null);
-        Event e = null;
         while (cs.moveToNext()) {
             int year=cs.getInt(0);
             int month=cs.getInt(1);
@@ -109,6 +121,7 @@ public class EventManagerAdapter implements EventManager{
             String description=cs.getString(5);
             addEvent(new Event(year,month,day,hour,minute,description));
         }
+        //关闭
         cs.close();
         db.close();
     }
